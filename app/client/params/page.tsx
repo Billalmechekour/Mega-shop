@@ -1,10 +1,18 @@
 'use client'
 import { useState, useRef } from "react";
-import { useTheme } from "next-themes";
+import { useTheme } from "next-themes"; // Toujours importé car utilisé dans le composant, mais le bouton est supprimé
 import { toast } from "sonner";
-import { ArrowLeft, Camera, CreditCard, User, Shield, MapPin, Phone, Settings as SettingsIcon, Building, BadgeCheck, Moon, Sun } from "lucide-react";
+import { ArrowLeft, Camera, CreditCard, User, Shield, MapPin, Phone, Settings as SettingsIcon, Building, BadgeCheck, Moon, Sun, Settings } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { Montserrat } from "next/font/google";
+import { motion } from "framer-motion";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: "800",
+  display: "swap",
+});
 
 interface PersonalInfo {
   firstName: string;
@@ -15,7 +23,7 @@ interface PersonalInfo {
 interface AddressInfo {
   address: string;
   city: string;
-  state: string;
+  province: string;
   postalCode: string;
 }
 
@@ -38,7 +46,7 @@ interface SellerInfo {
 }
 
 export default function SettingsPage() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme(); // Toujours utilisé, mais le bouton est supprimé
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSellerActive, setIsSellerActive] = useState<boolean>(false);
@@ -53,13 +61,13 @@ export default function SettingsPage() {
   
   const [addressInfo, setAddressInfo] = useState<AddressInfo>({
     address: "123 Rue Principale",
-    city: "Paris",
-    state: "Île-de-France",
-    postalCode: "75001",
+    city: "Alger", // Changé de "Paris" à "Alger"
+    province: "Alger",
+    postalCode: "16000", // Changé de "75001" à "16000" (code postal d'Alger)
   });
   
   const [contactInfo, setContactInfo] = useState<ContactInfo>({
-    phone: "+33 6 12 34 56 78",
+    phone: "+213 6 12 34 56 78",
     alternateEmail: "",
   });
   
@@ -75,6 +83,42 @@ export default function SettingsPage() {
     routingNumber: "",
     bio: "",
   });
+
+  // Liste des provinces
+  const provinces = [
+    "Adrar", "Chlef", "Laghouat", "Oum El Bouaghi", "Batna", "Béjaïa", "Biskra", "Béchar", "Blida", "Bouira",
+    "Tamanrasset", "Tébessa", "Tlemcen", "Tiaret", "Tizi Ouzou", "Alger", "Djelfa", "Jijel", "Sétif", "Saïda",
+    "Skikda", "Sidi Bel Abbès", "Annaba", "Guelma", "Constantine", "Médéa", "Mostaganem", "M’Sila", "Mascara",
+    "Ouargla", "Oran", "El Bayadh", "Illizi", "Bordj Bou Arreridj", "Boumerdès", "El Tarf", "Tindouf", "Tissemsilt",
+    "El Oued", "Khenchela", "Souk Ahras", "Tipaza", "Mila", "Aïn Defla", "Naâma", "Aïn Témouchent", "Ghardaïa",
+    "Relizane", "Timimoun", "Bordj Badji Mokhtar", "Ouled Djellal", "Béni Abbès", "In Salah", "In Guezzam",
+    "Touggourt", "Djanet", "El M’Ghair", "El Meniaa"
+  ];
+
+  // État pour gérer l'input de recherche/filtrage des provinces
+  const [provinceInput, setProvinceInput] = useState<string>(addressInfo.province);
+  const [filteredProvinces, setFilteredProvinces] = useState<string[]>(provinces);
+  const [isProvinceDropdownOpen, setIsProvinceDropdownOpen] = useState<boolean>(false);
+
+  // Filtrer les provinces en fonction de l'input
+  const handleProvinceInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setProvinceInput(value);
+    setAddressInfo({ ...addressInfo, province: value });
+
+    const filtered = provinces.filter((province) =>
+      province.toLowerCase().startsWith(value.toLowerCase())
+    );
+    setFilteredProvinces(filtered);
+    setIsProvinceDropdownOpen(true);
+  };
+
+  // Sélectionner une province depuis la liste
+  const handleProvinceSelect = (province: string) => {
+    setProvinceInput(province);
+    setAddressInfo({ ...addressInfo, province });
+    setIsProvinceDropdownOpen(false);
+  };
 
   const handlePersonalInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPersonalInfo({
@@ -182,7 +226,7 @@ export default function SettingsPage() {
       toast.success("Statut de vendeur activé");
       return;
     }
-    if (!sellerInfo.businessName || !sellerInfo.accountNumber || !sellerInfo.routingNumber ) {
+    if (!sellerInfo.businessName || !sellerInfo.accountNumber || !sellerInfo.routingNumber) {
       toast.error("Veuillez remplir tous les champs obligatoires");
       return;
     }
@@ -194,17 +238,32 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 pt-10 pb-16 px-4 md:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 py-6 px-4 sm:pl-10 sm:pr-10 relative">
       <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Paramètres du compte</h1>
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
-          >
-            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </button>
+        {/* Titre "Paramètres du compte" avec animation et texte descriptif */}
+        <div className="mb-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <motion.div
+              initial={{ rotate: 0 }}
+              animate={{ rotate: [0, 15, -15, 10, -10, 5, -5, 0] }}
+              transition={{ duration: 1.2, ease: "easeInOut", repeat: 0 }}
+            >
+              <Settings className="h-8 w-8 text-black" />
+            </motion.div>
+            <h1
+              className={`text-3xl font-extrabold text-gray-900 tracking-tight ${montserrat.className}`}
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              Paramètres du compte
+            </h1>
+          </div>
+          {/* Bouton de changement de thème supprimé */}
         </div>
+
+        {/* Texte descriptif */}
+        <p className="mb-6 text-lg text-gray-700">
+          Gérez vos informations personnelles, vos paramètres de sécurité et vos options de vendeur ici.
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] lg:grid-cols-[250px_1fr] gap-8">
           {/* Sidebar */}
@@ -272,7 +331,10 @@ export default function SettingsPage() {
             {activeTab === "personal" && (
               <div className="bg-white rounded-xl border shadow-sm">
                 <div className="p-6 border-b">
-                  <h2 className="text-xl font-semibold">Informations personnelles</h2>
+                  <h2 className="text-xl font-semibold flex items-center gap-2">
+                    <User className="h-5 w-5 text-black" />
+                    Informations personnelles
+                  </h2>
                   <p className="text-sm text-gray-500">Mettez à jour vos informations personnelles et de contact.</p>
                 </div>
                 <form onSubmit={handlePersonalSubmit} className="p-6 space-y-6">
@@ -324,7 +386,10 @@ export default function SettingsPage() {
             {activeTab === "address" && (
               <div className="bg-white rounded-xl border shadow-sm">
                 <div className="p-6 border-b">
-                  <h2 className="text-xl font-semibold">Informations d'adresse</h2>
+                  <h2 className="text-xl font-semibold flex items-center gap-2">
+                    <MapPin className="h-5 w-5 text-black" />
+                    Informations d'adresse
+                  </h2>
                   <p className="text-sm text-gray-500">Mettez à jour vos informations d'adresse de livraison et de facturation.</p>
                 </div>
                 <form onSubmit={handleAddressSubmit} className="p-6 space-y-6">
@@ -350,14 +415,37 @@ export default function SettingsPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label htmlFor="state" className="block text-sm font-medium">Région / Département</label>
-                      <input
-                        id="state"
-                        name="state"
-                        value={addressInfo.state}
-                        onChange={handleAddressInfoChange}
-                        className="w-full px-3 py-2 border rounded-md"
-                      />
+                      <label htmlFor="province" className="block text-sm font-medium">Province</label>
+                      <div className="relative">
+                        <input
+                          id="province"
+                          name="province"
+                          type="text"
+                          value={provinceInput}
+                          onChange={handleProvinceInputChange}
+                          onFocus={() => setIsProvinceDropdownOpen(true)}
+                          onBlur={() => setTimeout(() => setIsProvinceDropdownOpen(false), 200)}
+                          className="w-full px-3 py-2 border rounded-md"
+                          autoComplete="off"
+                        />
+                        {isProvinceDropdownOpen && (
+                          <ul className="absolute z-10 w-full bg-white border rounded-md max-h-60 overflow-y-auto shadow-lg">
+                            {filteredProvinces.length > 0 ? (
+                              filteredProvinces.map((province) => (
+                                <li
+                                  key={province}
+                                  onClick={() => handleProvinceSelect(province)}
+                                  className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                                >
+                                  {province}
+                                </li>
+                              ))
+                            ) : (
+                              <li className="px-3 py-2 text-gray-500">Aucune province trouvée</li>
+                            )}
+                          </ul>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <div className="grid gap-6 sm:grid-cols-2">
@@ -387,7 +475,10 @@ export default function SettingsPage() {
             {activeTab === "contact" && (
               <div className="bg-white rounded-xl border shadow-sm">
                 <div className="p-6 border-b">
-                  <h2 className="text-xl font-semibold">Informations de contact</h2>
+                  <h2 className="text-xl font-semibold flex items-center gap-2">
+                    <Phone className="h-5 w-5 text-black" />
+                    Informations de contact
+                  </h2>
                   <p className="text-sm text-gray-500">Mettez à jour vos coordonnées pour les notifications de commande.</p>
                 </div>
                 <form onSubmit={handleContactSubmit} className="p-6 space-y-6">
@@ -422,7 +513,7 @@ export default function SettingsPage() {
                 <div className="bg-white rounded-xl border shadow-sm">
                   <div className="p-6 border-b">
                     <h2 className="text-xl font-semibold flex items-center gap-2">
-                      <Shield className="h-5 w-5 text-blue-500" />
+                      <Shield className="h-5 w-5 text-black" />
                       Changer le mot de passe
                     </h2>
                     <p className="text-sm text-gray-500">Mettez à jour votre mot de passe pour sécuriser votre compte</p>
@@ -482,7 +573,7 @@ export default function SettingsPage() {
                 <div className="bg-white rounded-xl border shadow-sm">
                   <div className="p-6 border-b">
                     <h2 className="text-xl font-semibold flex items-center gap-2">
-                      <BadgeCheck className="h-5 w-5 text-blue-500" />
+                      <BadgeCheck className="h-5 w-5 text-black" />
                       Statut de vendeur
                     </h2>
                     <p className="text-sm text-gray-500">Activez votre compte vendeur pour commencer à vendre des produits</p>
@@ -512,7 +603,7 @@ export default function SettingsPage() {
                     <div className="bg-white rounded-xl border shadow-sm">
                       <div className="p-6 border-b">
                         <h2 className="text-xl font-semibold flex items-center gap-2">
-                          <Building className="h-5 w-5 text-blue-500" />
+                          <Building className="h-5 w-5 text-black" />
                           Informations sur l'entreprise
                         </h2>
                         <p className="text-sm text-gray-500">Fournissez des détails sur votre entreprise</p>
@@ -545,7 +636,7 @@ export default function SettingsPage() {
                     <div className="bg-white rounded-xl border shadow-sm">
                       <div className="p-6 border-b">
                         <h2 className="text-xl font-semibold flex items-center gap-2">
-                          <CreditCard className="h-5 w-5 text-blue-500" />
+                          <CreditCard className="h-5 w-5 text-black" />
                           Coordonnées bancaires
                         </h2>
                         <p className="text-sm text-gray-500">Ajoutez vos informations bancaires pour les paiements</p>

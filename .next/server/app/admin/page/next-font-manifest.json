@@ -1,0 +1,13 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/app/admin/page": [
+      "static/media/Satoshi_Bold-s.p.6b0fc1e2.woff",
+      "static/media/integralcf_bold-s.p.c6cb06a4.woff",
+      "static/media/Satoshi_Medium-s.p.e2210dbf.woff",
+      "static/media/Satoshi_Regular-s.p.d967cd81.woff"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}

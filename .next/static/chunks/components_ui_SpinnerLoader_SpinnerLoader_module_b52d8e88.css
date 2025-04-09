@@ -1,0 +1,15 @@
+/* [project]/components/ui/SpinnerLoader/SpinnerLoader.module.css [app-client] (css) */
+.SpinnerLoader-module__bGQPXG__Loader {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: 1s linear infinite SpinnerLoader-module__bGQPXG__l2;
+  display: inline-block;
+}
+
+@keyframes SpinnerLoader-module__bGQPXG__l2 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/*# sourceMappingURL=components_ui_SpinnerLoader_SpinnerLoader_module_b52d8e88.css.map*/

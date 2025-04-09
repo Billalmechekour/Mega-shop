@@ -1,0 +1,18 @@
+/* [next]/internal/font/google/montserrat_8027b119.module.css [app-client] (css) */
+@font-face {
+  font-family: Montserrat Fallback;
+  src: local(Arial);
+  ascent-override: 85.79%;
+  descent-override: 22.25%;
+  line-gap-override: 0.0%;
+  size-adjust: 112.83%;
+}
+
+.montserrat_8027b119-module__8H-ElW__className {
+  font-family: Montserrat, Montserrat Fallback;
+  font-weight: 800;
+  font-style: normal;
+}
+
+
+/*# sourceMappingURL=%5Bnext%5D_internal_font_google_montserrat_8027b119_module_5c5d8776.css.map*/

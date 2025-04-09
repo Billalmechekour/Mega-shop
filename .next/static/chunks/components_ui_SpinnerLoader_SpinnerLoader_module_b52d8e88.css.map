@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/ui/SpinnerLoader/SpinnerLoader.module.css"],"sourcesContent":[".Loader {\r\n  aspect-ratio: 1;\r\n  border-radius: 50%;\r\n  animation: l2 1s infinite linear;\r\n  display: inline-block;\r\n}\r\n@keyframes l2 {\r\n  to {\r\n    transform: rotate(1turn);\r\n  }\r\n}\r\n"],"names":[],"mappings":"AAAA;;;;;;;AAMA"}}]
+}

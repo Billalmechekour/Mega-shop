@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/user/Desktop/rayane/test/app/admin/layout.tsx"],"sourcesContent":["// app/admin/layout.tsx\r\nimport { ReactNode } from 'react'\r\n\r\nexport default function AdminLayout({\r\n  children,\r\n}: {\r\n  children: ReactNode\r\n}) {\r\n  return (\r\n    <div className=\"flex min-h-screen flex-col\">\r\n      {/* Si vous souhaitez ajouter une barre latérale d'administration, \r\n          vous pouvez la placer ici */}\r\n      <main className=\"flex-1\">{children}</main>\r\n    </div>\r\n  )\r\n}"],"names":[],"mappings":"AAAA,uBAAuB;;;;;;AAGR,SAAS,YAAY,EAClC,QAAQ,EAGT;IACC,qBACE,8OAAC;QAAI,WAAU;kBAGb,cAAA,8OAAC;YAAK,WAAU;sBAAU;;;;;;;;;;;AAGhC","debugId":null}}]
+}

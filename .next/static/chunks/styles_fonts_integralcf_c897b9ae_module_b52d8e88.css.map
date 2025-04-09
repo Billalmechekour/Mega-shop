@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/styles/fonts/integralcf_c897b9ae.module.css"],"sourcesContent":["@font-face {\n    font-family: 'integralCF';\n    src: url('@vercel/turbopack-next/internal/font/local/font?{%22path%22:%22./integralcf-bold.woff%22,%22preload%22:true,%22has_size_adjust%22:true}') format('woff');\n    font-display: swap;\n    font-weight: 700;font-style: normal;\n}\n\n@font-face {\n    font-family: 'integralCF Fallback';\n    src: local(\"Arial\");\n    ascent-override: 72.12%;\ndescent-override: 8.39%;\nline-gap-override: 0.00%;\nsize-adjust: 149.06%;\n\n}\n\n.className {\n    font-family: 'integralCF', 'integralCF Fallback', sans-serif;\n    \n}\n.variable {\n    --font-integralCF: 'integralCF', 'integralCF Fallback', sans-serif;\n}\n\n"],"names":[],"mappings":"AAAA;;;;;;;;AAOA;;;;;;;;;AAUA;;;;AAIA"}}]
+}

@@ -1,0 +1,27 @@
+/* [project]/styles/fonts/integralcf_c897b9ae.module.css [app-client] (css) */
+@font-face {
+  font-family: integralCF;
+  src: url("../media/integralcf_bold-s.p.c6cb06a4.woff") format("woff");
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: integralCF Fallback;
+  src: local(Arial);
+  ascent-override: 72.12%;
+  descent-override: 8.39%;
+  line-gap-override: 0.0%;
+  size-adjust: 149.06%;
+}
+
+.integralcf_c897b9ae-module__saxlaW__className {
+  font-family: integralCF, integralCF Fallback, sans-serif;
+}
+
+.integralcf_c897b9ae-module__saxlaW__variable {
+  --font-integralCF: "integralCF", "integralCF Fallback", sans-serif;
+}
+
+/*# sourceMappingURL=styles_fonts_integralcf_c897b9ae_module_b52d8e88.css.map*/

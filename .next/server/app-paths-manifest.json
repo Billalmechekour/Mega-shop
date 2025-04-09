@@ -1,0 +1,9 @@
+{
+  "/(main)/page": "app/(main)/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/client/commandes/page": "app/client/commandes/page.js",
+  "/client/notifications/page": "app/client/notifications/page.js",
+  "/client/params/page": "app/client/params/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/manifest.webmanifest/route": "app/manifest.webmanifest/route.js"
+}

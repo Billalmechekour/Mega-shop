@@ -1,0 +1,34 @@
+{
+  "app": {
+    "[project]/app/(main)/page": [
+      "static/media/Satoshi_Regular-s.p.d967cd81.woff",
+      "static/media/Satoshi_Medium-s.p.e2210dbf.woff",
+      "static/media/integralcf_bold-s.p.c6cb06a4.woff",
+      "static/media/Satoshi_Bold-s.p.6b0fc1e2.woff"
+    ],
+    "[project]/app/client/commandes/page": [
+      "static/media/Satoshi_Regular-s.p.d967cd81.woff",
+      "static/media/Satoshi_Medium-s.p.e2210dbf.woff",
+      "static/media/integralcf_bold-s.p.c6cb06a4.woff",
+      "static/media/Satoshi_Bold-s.p.6b0fc1e2.woff",
+      "static/media/JTUHjIg1_i6t8kCHKm4532VJOt5_QNFgpCvr73w5aXp_p7K4KLg-s.p.b3d72d22.woff2"
+    ],
+    "[project]/app/client/notifications/page": [
+      "static/media/Satoshi_Regular-s.p.d967cd81.woff",
+      "static/media/Satoshi_Medium-s.p.e2210dbf.woff",
+      "static/media/integralcf_bold-s.p.c6cb06a4.woff",
+      "static/media/Satoshi_Bold-s.p.6b0fc1e2.woff",
+      "static/media/JTUHjIg1_i6t8kCHKm4532VJOt5_QNFgpCvr73w5aXp_p7K4KLg-s.p.b3d72d22.woff2"
+    ],
+    "[project]/app/client/params/page": [
+      "static/media/Satoshi_Regular-s.p.d967cd81.woff",
+      "static/media/Satoshi_Medium-s.p.e2210dbf.woff",
+      "static/media/integralcf_bold-s.p.c6cb06a4.woff",
+      "static/media/Satoshi_Bold-s.p.6b0fc1e2.woff",
+      "static/media/JTUHjIg1_i6t8kCHKm4532VJOt5_QNFgpCvr73w5aXp_p7K4KLg-s.p.b3d72d22.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

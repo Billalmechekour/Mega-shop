@@ -29,7 +29,7 @@ export default function GlobalLayout({
     <html lang="en">
       <body className={satoshi.className}>
         <HolyLoader color="#868686" />
-        <Link href='/'> Home</Link>
+
         
         <Providers>
           {children}
